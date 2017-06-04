@@ -46,7 +46,7 @@ class StandardOutput(BaseOutput):
             description = description_format.format(
                 right_post.subreddit.display_name, right_post.title)
 
-        description_str = '{0} vs. {1} - - - {2} '.format(
+        description_str = '{0} vs. {1} - {2} '.format(
             '/r/' + left_post.subreddit.display_name, '/r/' + right_post.subreddit.display_name, description)
 
         #reddit titles can only be 300 chars long

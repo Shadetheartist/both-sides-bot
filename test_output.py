@@ -29,5 +29,3 @@ output = UnintrusiveStandardOutput(storage)
 comment_l = praw.models.Comment(reddit, id='did5pko')
 comment_r = praw.models.Comment(reddit, id='difjxhd')
 print(output.build_reply(0, comment_l, comment_r))
-
-#so fucking slow jesus
