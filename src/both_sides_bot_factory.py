@@ -26,23 +26,27 @@ from src.both_sides_bot import BothSidesBot
 
 class BothSidesBotFactory(object):
 
-    def __init__(self):
+    def __init__(self, base_path):
         self.reddit = praw.Reddit('bot')
+        self.base_path = base_path
+
+        print("Initializing File Storage")
+        script_path = dir_path = os.path.dirname(os.path.realpath(__file__))
+        self.storage = FileStorage(
+            compare_list_file_path=self.base_path + '/storage/compare_list.txt',
+            post_history_file_path=self.base_path + '/storage/post_history.txt',
+            sub_blacklist_file_path=self.base_path + '/storage/blacklisted_subs.txt',
+            user_blacklist_file_path=self.base_path + '/storage/blacklisted_users.txt',
+        )
 
     def buildTestBot(self):
 
         print("*** Building Test Bot ***\n")
 
         reddit = self.reddit
+        storage = self.storage
 
         print("Initializing File Storage")
-        script_path = dir_path = os.path.dirname(os.path.realpath(__file__))
-        storage = FileStorage(
-            compare_list_file_path=script_path + '/storage/compare_list.txt',
-            post_history_file_path=script_path + '/storage/post_history.txt',
-            sub_blacklist_file_path=script_path + '/storage/blacklisted_subs.txt',
-            user_blacklist_file_path=script_path + '/storage/blacklisted_users.txt',
-        )
 
         print("Initializing UnintrusiveStandardOutput")
         output = UnintrusiveStandardOutput(storage)
@@ -74,20 +78,13 @@ class BothSidesBotFactory(object):
 
         reddit = self.reddit
 
-        print("Initializing File Storage")
-        script_path = dir_path = os.path.dirname(os.path.realpath(__file__))
-        storage = FileStorage(
-            compare_list_file_path=script_path + '/storage/compare_list.txt',
-            post_history_file_path=script_path + '/storage/post_history.txt',
-            sub_blacklist_file_path=script_path + '/storage/blacklisted_subs.txt',
-            user_blacklist_file_path=script_path + '/storage/blacklisted_users.txt',
-        )
+        storage = self.storage
 
         print("Initializing StandardOutput")
         output = StandardOutput(storage)
 
         print("Initializing StandardPoster")
-        poster = StandardPoster(reddit, output, storage, force_post=True)
+        poster = StandardPoster(reddit, output, storage, force_post=False)
 
         print("Initializing HotPostSubComparor")
         comparor = HotPostSubComparor(
