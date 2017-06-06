@@ -31,17 +31,18 @@ class BothSidesBotFactory(object):
         self.base_path = base_path
 
         print("Initializing File Storage")
-        script_path = dir_path = os.path.dirname(os.path.realpath(__file__))
-        self.storage = FileStorage(
-            compare_list_file_path=self.base_path + '/storage/compare_list.txt',
-            post_history_file_path=self.base_path + '/storage/post_history.txt',
-            sub_blacklist_file_path=self.base_path + '/storage/blacklisted_subs.txt',
-            user_blacklist_file_path=self.base_path + '/storage/blacklisted_users.txt',
-        )
 
     def buildTestBot(self):
 
         print("*** Building Test Bot ***\n")
+
+        script_path = dir_path = os.path.dirname(os.path.realpath(__file__))
+        self.storage = FileStorage(
+            compare_list_file_path=self.base_path + '/test_storage/compare_list.txt',
+            post_history_file_path=self.base_path + '/test_storage/post_history.txt',
+            sub_blacklist_file_path=self.base_path + '/test_storage/blacklisted_subs.txt',
+            user_blacklist_file_path=self.base_path + '/test_storage/blacklisted_users.txt',
+        )
 
         reddit = self.reddit
         storage = self.storage
@@ -75,6 +76,14 @@ class BothSidesBotFactory(object):
     def buildBot(self):
 
         print("*** Building [REAL BOY] Bot ***\n")
+
+        script_path = dir_path = os.path.dirname(os.path.realpath(__file__))
+        self.storage = FileStorage(
+            compare_list_file_path=self.base_path + '/storage/compare_list.txt',
+            post_history_file_path=self.base_path + '/storage/post_history.txt',
+            sub_blacklist_file_path=self.base_path + '/storage/blacklisted_subs.txt',
+            user_blacklist_file_path=self.base_path + '/storage/blacklisted_users.txt',
+        )
 
         reddit = self.reddit
 

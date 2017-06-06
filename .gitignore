@@ -101,3 +101,4 @@ ENV/
 praw.ini
 storage/
 src/.vscode/
+test_storage/
