@@ -28,9 +28,6 @@ class UserBlacklistInboxProcessor(BaseInboxProcessor):
                 self.process_mod_blacklist_request(comment)
 
     def process_user_self_blacklist_request(self, comment):
-        if self.validate_mod_blacklist(comment) == False:
-            return
-
         username = comment.author.name
 
         print('Blacklisting ' + username)
