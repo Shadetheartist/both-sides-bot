@@ -99,6 +99,6 @@ ENV/
 .mypy_cache/
 
 praw.ini
-storage/
+/storage/
 src/.vscode/
 test_storage/
