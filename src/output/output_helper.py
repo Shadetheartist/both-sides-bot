@@ -12,7 +12,10 @@ class OutputHelper(object):
 
     @staticmethod
     def get_nth(index):
-        return OutputHelper.nth[index + 1]
+        if(index < 20):
+            return OutputHelper.nth[index + 1]
+        else:
+            return '#' + str(index + 1)
 
     nth = {
         1: "First",

@@ -8,7 +8,7 @@ from src.output.output_helper import OutputHelper
 
 class StandardPoster(BasePoster):
 
-    def __init__(self, reddit, output: BaseOutput, storage: BaseStorage, force_post=False, comment_limit=20):
+    def __init__(self, reddit, output: BaseOutput, storage: BaseStorage, force_post=False, comment_limit=100):
         self.reddit = reddit
         self.output = output
         self.storage = storage
@@ -44,7 +44,7 @@ class StandardPoster(BasePoster):
         print("left-leaning comments found: ", len(left_comments))
         print("right-leaning comments found: ", len(right_comments))
 
-        for i in range(0, min(math.floor(limit), len(OutputHelper.nth), len(left_comments), len(right_comments))):
+        for i in range(0, min(math.floor(limit), len(left_comments), len(right_comments))):
             reply_body = self.output.build_reply(
                 i, left_comments[i], right_comments[i])
             try:
